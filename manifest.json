@@ -1,0 +1,30 @@
+{
+  "name": "FII Malicious app",
+  "version": "1.0",
+  "description": "SCD testing",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icons": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "history"
+  ]
+}
