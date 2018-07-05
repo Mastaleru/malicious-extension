@@ -1,5 +1,5 @@
 {
-  "name": "FII Malicious app",
+  "name": "Malicious app",
   "version": "1.0",
   "description": "SCD testing",
   "background": {
@@ -25,6 +25,11 @@
   },
   "manifest_version": 2,
   "permissions": [
-    "history"
+    "history",
+    "http://plusprivacy.com/*",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "SCD.json"
   ]
 }

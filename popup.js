@@ -9,7 +9,7 @@ chrome.runtime.sendMessage({
 
     var labels = Object.keys(response);
     var data = Object.keys(response).map(function(item){return response[item]});
-    showChart(labels,data);
+    showChart(labels.slice(0,6),data.slice(0,6));
 });
 
 
@@ -19,8 +19,9 @@ function showChart(labels, data){
         data: {
             labels: labels,
             datasets: [{
-                label: '# of Votes',
+                label: '# of Visits',
                 data: data,
+                fill:false,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

